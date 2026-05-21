@@ -1,6 +1,6 @@
 # `character-manager-5e`
 
-A modern D&D 5e character manager built with **React + TypeScript** frontend and a **PHP backend**, designed for the [Hack Club Macondo](https://hackclub.com/macondo/?utm_source=chatgpt.com) program.
+A modern D&D 5e character manager built with **React + TypeScript (Vite)** frontend and a **PHP backend**, designed for the [Hack Club Macondo](https://hackclub.com/macondo/) program.
 
 Create, manage, and export fully automated D&D 5e characters with support for:
 
@@ -11,10 +11,10 @@ Create, manage, and export fully automated D&D 5e characters with support for:
 * PDF export support
 * Cloud save/login system
 
-The app uses official/open D&D 5e APIs like:
+The app uses official/open D&D 5e APIs:
 
-* [Open5e API](https://api.open5e.com/?utm_source=chatgpt.com)
-* [D&D 5e API](https://www.dnd5eapi.co/?utm_source=chatgpt.com)
+* [Open5e API](https://api.open5e.com/)
+* [D&D 5e API](https://www.dnd5eapi.co/)
 
 ---
 
@@ -71,7 +71,9 @@ Search and view:
 * React
 * TypeScript (TSX)
 * Vite
-* TailwindCSS (planned)
+* **TanStack Router**
+* (optional) TanStack Query for API caching
+* (optional) Zustand for state management
 
 ## Backend
 
@@ -89,11 +91,11 @@ Search and view:
 
 # 📦 Dependencies & Setup
 
-Make sure you have the following installed:
+Make sure you have:
 
-* [Node.js](https://nodejs.org/?utm_source=chatgpt.com)
-* [PHP](https://www.php.net/?utm_source=chatgpt.com)
-* [Composer](https://getcomposer.org/?utm_source=chatgpt.com)
+* Node.js → [https://nodejs.org/](https://nodejs.org/)
+* PHP → [https://www.php.net/](https://www.php.net/)
+* Composer → [https://getcomposer.org/](https://getcomposer.org/)
 * MySQL or MariaDB
 * Git
 
@@ -101,11 +103,10 @@ Make sure you have the following installed:
 
 # 🚀 Setup Instructions
 
-## 1️⃣ Clone the Repository
+## 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/usern-4me/character-manager-5e.git
-
 cd character-manager-5e
 ```
 
@@ -115,15 +116,13 @@ cd character-manager-5e
 
 ```bash
 cd frontend
-
 npm install
-
 npm run dev
 ```
 
 Frontend runs on:
 
-```txt
+```
 http://localhost:5173
 ```
 
@@ -133,7 +132,6 @@ http://localhost:5173
 
 ```bash
 cd backend
-
 composer install
 ```
 
@@ -145,49 +143,85 @@ php -S localhost:8000
 
 Backend runs on:
 
-```txt
+```
 http://localhost:8000
+```
+
+---
+
+# 🧭 Frontend Routing (TanStack Router)
+
+This project uses **TanStack Router** for fully type-safe routing.
+
+## Planned Routes
+
+* `/` → Landing page
+* `/login` → Login page
+* `/register` → Register page
+* `/dashboard` → User dashboard
+* `/characters` → Character list
+* `/characters/$id` → Character sheet view
+* `/create-character` → Character creation wizard
+* `/search` → D&D database search
+
+---
+
+## Router Structure
+
+```
+frontend/src/
+├── routes/
+│   ├── __root.tsx
+│   ├── index.tsx
+│   ├── login.tsx
+│   ├── register.tsx
+│   ├── dashboard.tsx
+│   ├── search.tsx
+│   ├── create-character.tsx
+│   └── characters/
+│       ├── index.tsx
+│       └── $id.tsx
 ```
 
 ---
 
 # 🔐 Firebase Authentication Setup
 
-This project uses Firebase JWT authentication for login sessions.
-
-## Install Firebase JWT Package
+## Install dependency
 
 ```bash
 composer require firebase/php-jwt
 ```
 
-## Planned Authentication Flow
+## Auth Flow
 
-1. User logs in from frontend
+1. User logs in via frontend
 2. Firebase returns JWT token
 3. React app sends token to PHP backend
-4. Backend validates token
-5. User session is authorized
-6. User data stored/retrieved from SQL database
+4. Backend validates JWT
+5. Backend authorizes request
+6. User data is loaded from SQL database
 
 ---
 
 # 🗂️ Planned Folder Structure
 
-```txt
+```
 character-manager-5e/
 │
-├── frontend/                 # React + TSX frontend
+├── frontend/
 │   ├── src/
+│   │   ├── routes/            # TanStack Router
 │   │   ├── components/
-│   │   ├── pages/
+│   │   ├── pages/             # optional legacy pages
 │   │   ├── api/
 │   │   ├── hooks/
-│   │   └── App.tsx
+│   │   ├── store/
+│   │   └── main.tsx
 │   │
 │   └── package.json
 │
-├── backend/                  # PHP backend
+├── backend/
 │   ├── api/
 │   ├── auth/
 │   ├── database/
@@ -207,117 +241,147 @@ character-manager-5e/
 
 # 🗺️ Development Roadmap
 
+---
+
 # ✅ Phase 1 — Project Foundation
 
-* [x] Create GitHub repository
-* [x] Define overall project architecture
-* [ ] Setup React + TypeScript frontend
+* [x] Create Git repository
+* [x] Define project architecture
+* [ ] Setup React + TypeScript + Vite frontend
+* [ ] Setup TanStack Router
+* [ ] Setup base routing structure
 * [ ] Setup PHP backend structure
-* [ ] Configure Composer dependencies
-* [ ] Configure database connection
-* [ ] Setup environment variables
-* [ ] Create API routing system
-* [ ] Setup CORS handling
+* [ ] Install Composer dependencies
+* [ ] Configure database connection (MySQL/MariaDB)
+* [ ] Setup environment variables (.env handling)
+* [ ] Create basic API routing system
+* [ ] Setup CORS handling between frontend/backend
+* [ ] Test frontend ↔ backend communication
 
 ---
 
 # 🔐 Phase 2 — Authentication System
 
-* [ ] Configure Firebase project
-* [ ] Implement user registration
-* [ ] Implement login system
-* [ ] JWT token validation in PHP
-* [ ] Protected backend routes
-* [ ] Session persistence
-* [ ] Logout handling
-* [ ] Password reset flow
-* [ ] User profile system
+* [ ] Setup Firebase project
+* [ ] Configure Firebase auth in frontend
+* [ ] Create login page UI
+* [ ] Create register page UI
+* [ ] Store Firebase JWT token in frontend state
+* [ ] Send JWT token to PHP backend
+* [ ] Validate Firebase JWT in PHP backend
+* [ ] Create auth middleware (protected routes)
+* [ ] Create user table in SQL database
+* [ ] Link Firebase UID to database user
+* [ ] Implement session persistence
+* [ ] Logout functionality
+* [ ] Password reset flow (Firebase-based)
+* [ ] User profile endpoint (`/api/user`)
 
 ---
 
 # 📚 Phase 3 — D&D API Integration
 
-* [ ] Connect Open5e API
-* [ ] Connect D&D 5e API
-* [ ] Create reusable API wrapper
-* [ ] Cache API responses
-* [ ] Add error handling
-* [ ] Create search system
-* [ ] Add filters and categories
-* [ ] Search page UI
+* [ ] Connect Open5e API client
+* [ ] Connect D&D 5e API client
+* [ ] Build reusable API wrapper layer (frontend or backend proxy)
+* [ ] Normalize API responses (consistent schema)
+* [ ] Add caching layer for repeated requests
+* [ ] Handle API rate limits and errors
+* [ ] Create search system backend endpoint
+* [ ] Build search UI (frontend)
+* [ ] Add filters:
+
+  * class
+  * race
+  * spell level
+  * item type
+* [ ] Build detail pages for each entity
+* [ ] Add loading & error states
 
 ---
 
-# 🧙 Phase 4 — Character Creator
+# 🧙 Phase 4 — Character Creator (CORE SYSTEM)
 
-* [ ] Create character model/schema
-* [ ] Build race selection UI
-* [ ] Build class selection UI
-* [ ] Build background selection UI
-* [ ] Add ability score generator
-* [ ] Automatic modifier calculations
-* [ ] Skill proficiency calculations
-* [ ] Saving throw calculations
-* [ ] Armor class calculations
-* [ ] Initiative calculations
-* [ ] HP calculations
-* [ ] Equipment management
-* [ ] Spellcasting system
-* [ ] Feat system
-* [ ] Level-up system
-* [ ] Automatic feature application
-* [ ] Validation system
+* [ ] Design character database schema
+* [ ] Create character model (frontend + backend sync)
+* [ ] Build character creation wizard UI
+* [ ] Race selection system
+* [ ] Class selection system
+* [ ] Background selection system
+* [ ] Ability score generator (manual + random)
+* [ ] Ability modifier calculation system
+* [ ] Skill proficiency system
+* [ ] Saving throw system
+* [ ] Armor class (AC) calculation logic
+* [ ] Initiative calculation
+* [ ] Hit points (HP) calculation system
+* [ ] Equipment selection system
+* [ ] Currency tracking system
+* [ ] Inventory system (items, weight, limits)
+* [ ] Spellcasting system integration
+* [ ] Feat system implementation
+* [ ] Automatic feature application from class/race/feats
+* [ ] Level-up system (dynamic recalculation)
+* [ ] Multiclass support (stretch inside phase)
+* [ ] Validation system (prevent invalid builds)
+* [ ] Save character to database
+* [ ] Load/edit existing characters
 
 ---
 
 # 📄 Phase 5 — Character Sheet & Exporting
 
-* [ ] Character sheet UI
-* [ ] Editable sheet fields
-* [ ] Live stat recalculation
-* [ ] Fillable PDF integration
-* [ ] PDF export system
-* [ ] Print-friendly layout
-* [ ] Character import/export
-* [ ] Autosave support
+* [ ] Build full character sheet UI
+* [ ] Live stat recalculation system
+* [ ] Editable fields with validation
+* [ ] Add printable layout mode
+* [ ] Integrate fillable PDF generator
+* [ ] Export character to PDF
+* [ ] Export character to `.json`
+* [ ] Import `.json` character files
+* [ ] Auto-save system (optional toggle)
+* [ ] Versioning system for character updates
 
 ---
 
 # ☁️ Phase 6 — Cloud Storage & Sync
 
-* [ ] Save characters to database
+* [ ] Save characters in database per user
 * [ ] Character ownership system
-* [ ] Character sharing links
-* [ ] Multi-device sync
-* [ ] Backup/restore system
+* [ ] Character CRUD API (create/read/update/delete)
+* [ ] Character sharing via link
+* [ ] Multi-device sync support
+* [ ] Backup & restore system
+* [ ] Optional offline-first caching
 
 ---
 
 # 🎨 Phase 7 — UI Polish
 
-* [ ] Responsive layout
-* [ ] Dark mode
-* [ ] Loading animations
-* [ ] Better mobile support
-* [ ] Accessibility improvements
-* [ ] Toast notifications
-* [ ] Search optimizations
-* [ ] Better navigation
+* [ ] Responsive layout (desktop + mobile)
+* [ ] Navigation improvements (TanStack Router transitions)
+* [ ] Loading skeletons
+* [ ] Toast notifications system
+* [ ] Improved error handling UI
+* [ ] Dark/light theme support (optional)
+* [ ] Keyboard navigation support
+* [ ] Performance optimization (memoization, caching)
+* [ ] UX polishing (spacing, consistency)
 
 ---
 
 # 🚀 Stretch Goals
 
-* [ ] Homebrew content support
-* [ ] Campaign management
-* [ ] Encounter tracker
-* [ ] Dice roller
-* [ ] Initiative tracker
-* [ ] Offline support
-* [ ] Desktop app version
-* [ ] PWA support
-* [ ] Multiplayer/shared sheets
-* [ ] AI-assisted character creation
+* Homebrew content system
+* Campaign manager
+* Encounter tracker
+* Dice roller
+* Initiative tracker
+* Offline-first mode
+* PWA support
+* Desktop app version (Tauri/Electron)
+* Multiplayer/shared character sheets
+* AI-assisted character builder suggestions
 
 ---
 
@@ -339,10 +403,12 @@ php -S localhost:8000
 
 # 🔧 Example Backend Endpoints
 
-```txt
+```
 POST   /api/auth/login
 POST   /api/auth/register
+GET    /api/user
 GET    /api/classes
+GET    /api/races
 GET    /api/spells
 GET    /api/items
 POST   /api/characters
@@ -353,9 +419,7 @@ DELETE /api/characters/{id}
 
 ---
 
-# 💾 Database Plans
-
-## Tables
+# 💾 Database Tables
 
 * users
 * characters
@@ -364,16 +428,16 @@ DELETE /api/characters/{id}
 * character_spells
 * feats
 * equipment
-* campaigns (planned)
+* campaigns (optional future)
 
 ---
 
 # 📄 License
 
-**MIT License**
+MIT License
 
 ---
 
 # 🎲 Goal
 
-The goal of this project is to create a powerful but easy-to-use D&D 5e character manager that automates the annoying parts of character creation while still staying flexible for real tabletop play.
+To build a fast, structured, and intuitive D&D 5e character manager that removes tedious bookkeeping while preserving full tabletop flexibility and depth.
