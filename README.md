@@ -71,7 +71,7 @@ Search and view:
 * React
 * TypeScript (TSX)
 * Vite
-* **TanStack Router**
+* TanStack Router
 * (optional) TanStack Query for API caching
 * (optional) Zustand for state management
 
@@ -247,11 +247,11 @@ character-manager-5e/
 
 * [x] Create Git repository
 * [x] Define project architecture
-* [ ] Setup React + TypeScript + Vite frontend
-* [ ] Setup TanStack Router
-* [ ] Setup base routing structure
-* [ ] Setup PHP backend structure
-* [ ] Install Composer dependencies
+* [x] Setup React + TypeScript + Vite frontend
+* [x] Setup TanStack Router
+* [x] Setup base routing structure
+* [x] Setup PHP backend structure
+* [x] Install Composer dependencies
 * [ ] Configure database connection (MySQL/MariaDB)
 * [ ] Setup environment variables (.env handling)
 * [ ] Create basic API routing system
