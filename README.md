@@ -252,11 +252,11 @@ character-manager-5e/
 * [x] Setup base routing structure
 * [x] Setup PHP backend structure
 * [x] Install Composer dependencies
-* [ ] Configure database connection (MySQL/MariaDB)
+* [x] Configure database connection (MySQL/MariaDB)
 * [ ] Setup environment variables (.env handling)
-* [ ] Create basic API routing system
-* [ ] Setup CORS handling between frontend/backend
-* [ ] Test frontend ↔ backend communication
+* [x] Create basic API routing system
+* [x] Setup CORS handling between frontend/backend
+* [x] Test frontend ↔ backend communication
 
 ---
 
