@@ -1,6 +1,6 @@
 # `character-manager-5e`
 
-A modern D&D 5e character manager built with **React + TypeScript (Vite)** frontend and a **PHP backend**, designed for the [Hack Club Macondo](https://hackclub.com/macondo/) program.
+A modern D&D 5e character manager built with **SvelteKit + TypeScript** frontend and a **PHP backend**, designed for the [Hack Club Macondo](https://hackclub.com/macondo/?utm_source=chatgpt.com) program.
 
 Create, manage, and export fully automated D&D 5e characters with support for:
 
@@ -13,8 +13,8 @@ Create, manage, and export fully automated D&D 5e characters with support for:
 
 The app uses official/open D&D 5e APIs:
 
-* [Open5e API](https://api.open5e.com/)
-* [D&D 5e API](https://www.dnd5eapi.co/)
+* [Open5e API](https://api.open5e.com/?utm_source=chatgpt.com)
+* [D&D 5e API](https://www.dnd5eapi.co/?utm_source=chatgpt.com)
 
 ---
 
@@ -68,12 +68,11 @@ Search and view:
 
 ## Frontend
 
-* React
-* TypeScript (TSX)
+* SvelteKit
+* TypeScript
 * Vite
-* TanStack Router
-* (optional) TanStack Query for API caching
-* (optional) Zustand for state management
+* Svelte Stores
+* (optional) TanStack Query for caching/API state
 
 ## Backend
 
@@ -93,9 +92,9 @@ Search and view:
 
 Make sure you have:
 
-* Node.js → [https://nodejs.org/](https://nodejs.org/)
-* PHP → [https://www.php.net/](https://www.php.net/)
-* Composer → [https://getcomposer.org/](https://getcomposer.org/)
+* [Node.js](https://nodejs.org/?utm_source=chatgpt.com)
+* [PHP](https://www.php.net/?utm_source=chatgpt.com)
+* [Composer](https://getcomposer.org/?utm_source=chatgpt.com)
 * MySQL or MariaDB
 * Git
 
@@ -122,7 +121,7 @@ npm run dev
 
 Frontend runs on:
 
-```
+```txt
 http://localhost:5173
 ```
 
@@ -143,15 +142,15 @@ php -S localhost:8000
 
 Backend runs on:
 
-```
+```txt
 http://localhost:8000
 ```
 
 ---
 
-# 🧭 Frontend Routing (TanStack Router)
+# 🧭 Frontend Routing (SvelteKit)
 
-This project uses **TanStack Router** for fully type-safe routing.
+This project uses **SvelteKit file-based routing**.
 
 ## Planned Routes
 
@@ -160,7 +159,7 @@ This project uses **TanStack Router** for fully type-safe routing.
 * `/register` → Register page
 * `/dashboard` → User dashboard
 * `/characters` → Character list
-* `/characters/$id` → Character sheet view
+* `/characters/[id]` → Character sheet view
 * `/create-character` → Character creation wizard
 * `/search` → D&D database search
 
@@ -168,19 +167,24 @@ This project uses **TanStack Router** for fully type-safe routing.
 
 ## Router Structure
 
-```
-frontend/src/
-├── routes/
-│   ├── __root.tsx
-│   ├── index.tsx
-│   ├── login.tsx
-│   ├── register.tsx
-│   ├── dashboard.tsx
-│   ├── search.tsx
-│   ├── create-character.tsx
-│   └── characters/
-│       ├── index.tsx
-│       └── $id.tsx
+```txt
+frontend/src/routes/
+├── +layout.svelte
+├── +page.svelte
+├── login/
+│   └── +page.svelte
+├── register/
+│   └── +page.svelte
+├── dashboard/
+│   └── +page.svelte
+├── search/
+│   └── +page.svelte
+├── create-character/
+│   └── +page.svelte
+└── characters/
+    ├── +page.svelte
+    └── [id]/
+        └── +page.svelte
 ```
 
 ---
@@ -197,7 +201,7 @@ composer require firebase/php-jwt
 
 1. User logs in via frontend
 2. Firebase returns JWT token
-3. React app sends token to PHP backend
+3. SvelteKit app sends token to PHP backend
 4. Backend validates JWT
 5. Backend authorizes request
 6. User data is loaded from SQL database
@@ -206,18 +210,18 @@ composer require firebase/php-jwt
 
 # 🗂️ Planned Folder Structure
 
-```
+```txt
 character-manager-5e/
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── routes/            # TanStack Router
-│   │   ├── components/
-│   │   ├── pages/             # optional legacy pages
-│   │   ├── api/
-│   │   ├── hooks/
-│   │   ├── store/
-│   │   └── main.tsx
+│   │   ├── routes/
+│   │   ├── lib/
+│   │   │   ├── components/
+│   │   │   ├── stores/
+│   │   │   ├── api/
+│   │   │   └── utils/
+│   │   └── app.html
 │   │
 │   └── package.json
 │
@@ -247,8 +251,7 @@ character-manager-5e/
 
 * [x] Create Git repository
 * [x] Define project architecture
-* [x] Setup React + TypeScript + Vite frontend
-* [x] Setup TanStack Router
+* [x] Setup SvelteKit + TypeScript frontend
 * [x] Setup base routing structure
 * [x] Setup PHP backend structure
 * [x] Install Composer dependencies
@@ -359,7 +362,7 @@ character-manager-5e/
 # 🎨 Phase 7 — UI Polish
 
 * [ ] Responsive layout (desktop + mobile)
-* [ ] Navigation improvements (TanStack Router transitions)
+* [ ] Navigation improvements
 * [ ] Loading skeletons
 * [ ] Toast notifications system
 * [ ] Improved error handling UI
@@ -403,7 +406,7 @@ php -S localhost:8000
 
 # 🔧 Example Backend Endpoints
 
-```
+```txt
 POST   /api/auth/login
 POST   /api/auth/register
 GET    /api/user
