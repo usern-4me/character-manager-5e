@@ -2,7 +2,69 @@
   "hash": "a14c9e80",
   "configHash": "7fa951a0",
   "lockfileHash": "168f87c2",
+<<<<<<< HEAD
   "browserHash": "d5d0675d",
   "optimized": {},
   "chunks": {}
+=======
+  "browserHash": "13062dfe",
+  "optimized": {
+    "@tanstack/react-router-devtools": {
+      "src": "../../node_modules/@tanstack/react-router-devtools/dist/esm/index.js",
+      "file": "@tanstack_react-router-devtools.js",
+      "fileHash": "c56d8a4c",
+      "needsInterop": false
+    },
+    "@tanstack/react-router": {
+      "src": "../../node_modules/@tanstack/react-router/dist/esm/index.dev.js",
+      "file": "@tanstack_react-router.js",
+      "fileHash": "45ba9c01",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "f137daad",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "22dd9873",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "a7458b27",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "BaseTanStackRouterDevtoolsPanel-SWyE65Is-DQjw5lZR": {
+      "file": "BaseTanStackRouterDevtoolsPanel-SWyE65Is-DQjw5lZR.js",
+      "isDynamicEntry": true
+    },
+    "FloatingTanStackRouterDevtools-CnpwH7La-zg0SkAOV": {
+      "file": "FloatingTanStackRouterDevtools-CnpwH7La-zg0SkAOV.js",
+      "isDynamicEntry": true
+    },
+    "context-DmSxegOg-DdyjnR8F": {
+      "file": "context-DmSxegOg-DdyjnR8F.js",
+      "isDynamicEntry": false
+    },
+    "index.dev-DHYA5mpo": {
+      "file": "index.dev-DHYA5mpo.js",
+      "isDynamicEntry": false
+    },
+    "react-CoTh1R2n": {
+      "file": "react-CoTh1R2n.js",
+      "isDynamicEntry": false
+    },
+    "react-dom-DWSBsIl4": {
+      "file": "react-dom-DWSBsIl4.js",
+      "isDynamicEntry": false
+    }
+  }
+>>>>>>> frontendSetup
 }
