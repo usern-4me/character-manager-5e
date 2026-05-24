@@ -3,7 +3,7 @@
 	import Header from './Header.svelte';
 
 	import LoginView from './login/LoginView.svelte';
-	let isAuth = $state(true);
+	let isAuth = $state(false);
 	let { children } = $props();
 
 
