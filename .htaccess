@@ -1,8 +1,0 @@
-<Directory "/srv/http/character-manager-5e">
-    Options Indexes FollowSymLinks
-    
-    AllowOverride All
-    
-    Require all granted
-</Directory>
-

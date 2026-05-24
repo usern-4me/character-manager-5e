@@ -31,10 +31,11 @@ class DBModel
 
     public function connect()
     {
+        $this->mysqli = null;
         $this->mysqli = new mysqli($this->host, $this->username, $this->password, $this->dbname);
         
-        if ($this->mysqli->connect_errno) {
-            throw new Exception("Connection Error (" . $this->mysqli->connect_errno . "): " . $this->mysqli->connect_error);
+        if ($this->mysqli->connect_error) {
+            throw new Exception("Connection Error: " . $this->mysqli->connect_error);
         }
     }
 
@@ -45,4 +46,6 @@ class DBModel
             $this->mysqli = null;
         }
     }
+
+
 }

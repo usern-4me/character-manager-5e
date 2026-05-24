@@ -3,26 +3,27 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
+
+
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Methods: POST, OPTIONS, GET, DELETE, PUT");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 
-if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-require_once __DIR__ . '/controllers/UserController.php';
-
-
+require_once __DIR__ . '/controllers/userController.php';
 
 
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-$request = $_GET['url'] ?? null; 
+$request = isset($_GET['url']) ? $_GET['url'] : 'not set';
 
 $input = json_decode(file_get_contents('php://input'), true)??[];
 
@@ -35,7 +36,7 @@ switch ($request) {
         }
         $username = $input['username'] ?? "";
         $password = $input['password'] ?? "";
-        $controller = new UserController();
+        $controller = new userController();
         $controller->createUser($username, $password);
         break;
 

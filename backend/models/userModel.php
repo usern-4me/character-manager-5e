@@ -1,16 +1,30 @@
 <?php
 require_once __DIR__ . '/../DBModel.php';
 
-class User {
-    private $db;
+class userModel extends DBModel {
 
-    public function __construct() {
-        $database = new Database();
-        $this->db = $database->getConnection();
-    }
-    public function create($username, $password) {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $this->db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-        return $stmt->execute(['username' => $username, 'password' => $hashedPassword]);
+    public function create(string $username, string $password) {
+        $this->connect();
+        $stmt = $this->mysqli->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+        if (!$stmt) {
+            $error = $this->mysqli->error;
+            $this->closeConnect();
+            throw new Exception("Prepare failed: $error");
+        }
+        if (!$stmt->bind_param("ss", $username, $password)) {
+            $error = $stmt->error;
+            $stmt->close();
+            $this->closeConnect();
+            throw new Exception("Bind failed: $error");
+        }
+        $success = $stmt->execute();
+        if (!$success) {
+            $error = $stmt->error;
+            $stmt->close();
+            $this->closeConnect();
+            throw new Exception("Execute failed: $error");
+        }
+        $this->closeConnect();
+        return true;
     }
 }
