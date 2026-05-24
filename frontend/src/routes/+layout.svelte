@@ -1,5 +1,6 @@
 <script lang="ts">
 	import './layout.css';
+	import Header from './Header.svelte';
 
 	import LoginView from './login/LoginView.svelte';
 	let isAuth = $state(true);
@@ -16,12 +17,8 @@
 <LoginView />
 {:else}
 <div id="app">
-	<nav>
-		<a href="/">home</a>
+	<Header />
 
-		<button onclick={() => isAuth = false} class="logout-btn">Log Out</button>
-
-	</nav>
 	<main id="main-content">
 		{@render children()}
 	</main>
