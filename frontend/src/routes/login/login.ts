@@ -6,8 +6,6 @@ export interface userInfo{
 export interface loginRes{
     msg: string;
 }
-
-
 export async function processLogin(info: userInfo, resRef: loginRes){
     resRef.msg = "logged in";
 }
