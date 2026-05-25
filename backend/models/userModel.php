@@ -27,4 +27,29 @@ class userModel extends DBModel {
         $this->closeConnect();
         return true;
     }
+    public function getUserByName(string $username){
+        $this->connect;
+        $stmt = $this->mysqli->prepare('SELECT * from users WHERE username = "?"');
+        if(!$stmt){
+            $error = $this->mysqli->error;
+            $this->closeConnect();
+            throw new Exception("Prepare failed: $error");
+        }
+        $stmt->bind_param("s", $username);
+        if(!$stmt){
+            $error = $stmt->error;
+            $stmt->close();
+            $this->closeConnect();
+            throw new Exception("Bind failed: $error");
+        }
+        $res = $stmt->execute();
+        if(!$res){
+            $error = $stmt->error;
+            $stmt->close();
+            $this-closeConnect();
+            throw new Exception("Execute failed: $error");
+        }
+        $this->closeConnect();
+        return $res;
+    }
 }
