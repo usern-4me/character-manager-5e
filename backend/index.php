@@ -39,6 +39,16 @@ switch ($request) {
         $controller = new userController();
         $controller->createUser($username, $password);
         break;
+    case 'getUserByName':
+        if($requestMethod !== 'GET' || $requestMethod !== 'POST') {
+            http_response_code('405');
+            echo json_encode(['error' => 'Method Not Allowed. Must be POST or GET']);
+            exit;
+        }
+        $username = $_GET['username'] ?? $input['username'] ?? "";
+        $controller = new userController();
+        // call func
+        break;
 
     default:
         http_response_code(404);
