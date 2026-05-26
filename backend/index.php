@@ -47,7 +47,16 @@ switch ($request) {
         }
         $username = $_GET['username'] ?? $input['username'] ?? "";
         $controller = new userController();
-        $controller->getUsersByName($username);
+        $controller->getUserByName($username);
+        break;
+    case 'getUsers':
+        if($requestMethod !== 'GET'){
+            http_response_code(405);
+            echo json_encode(['error'=> 'Method Not Nllowed. Must be GET.']);
+            exit;
+        }
+        $controller = new userController();
+        $controller->getUsers();
         break;
 
     default:

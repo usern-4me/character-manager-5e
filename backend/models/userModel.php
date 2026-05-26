@@ -28,28 +28,50 @@ class userModel extends DBModel {
         return true;
     }
     public function getUserByName(string $username){
-        $this->connect;
-        $stmt = $this->mysqli->prepare('SELECT * from users WHERE username = "?"');
+        $this->connect();
+        $stmt = $this->mysqli->prepare("SELECT * from users WHERE username = ? LIMIT 1");
         if(!$stmt){
             $error = $this->mysqli->error;
             $this->closeConnect();
             throw new Exception("Prepare failed: $error");
         }
-        $stmt->bind_param("s", $username);
-        if(!$stmt){
+        $name = trim($username);
+        if(!$stmt->bind_param("s", $name)){
             $error = $stmt->error;
             $stmt->close();
             $this->closeConnect();
             throw new Exception("Bind failed: $error");
         }
-        $res = $stmt->execute();
-        if(!$res){
+        
+        if(!$stmt->execute()){
             $error = $stmt->error;
             $stmt->close();
-            $this-closeConnect();
+            $this->closeConnect();
             throw new Exception("Execute failed: $error");
         }
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc(); 
+        $stmt->close();
         $this->closeConnect();
-        return $res;
+        return $user; 
     }
+    public function getUsers(){
+        $this->connect();
+        $stmt= $this->mysqli->prepare("SELECT * from users");
+        if(!$stmt){
+            $error = $this->mysqli->error;
+            $this->closeConnect();
+            throw new Exception("prepare failed: $error");
+        }
+        if(!$stmt->execute()){
+            $error = $stmt->error;
+            $stmt->close();
+            $this->closeConnect();
+            throw new Exception("execute failed: $error");
+        }
+        $result = $stmt->get_result();
+        $stmt->close();
+        $this->closeConnect();
+        return $result;
+    }//TODO: Not returning anything
 }

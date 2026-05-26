@@ -13,6 +13,12 @@ class userController {
         $hashedPassword = hash('sha512', $password);
         try {
             $userModel = new userModel();
+
+            if($userModel->getUserByName($username)){
+                echo json_encode(['status'=>'error', 'message'=> 'Username taken.']);
+                return;
+            }
+
             $created = $userModel->create($username, $hashedPassword);
             if ($created) {
                 echo json_encode(['status' => 'success', 'message' => 'User created']);
@@ -35,11 +41,21 @@ class userController {
         try{
             $userModel = new userModel();
             $user = $userModel->getUserByName($username);
-            echo json_encode(['id'=>$user['id'],'username'=>$user['username']]); //TODO: test func;
+            echo json_encode(['id'=>$user['id'],'username'=>$user['username']]);
         }catch(Exception $e){
             error_log('getUserByName error: ' . $e->getMessage());
             http_response_code(500);
             echo json_encode(['status' => 'error', 'message' => 'Unable to get user']);
+        }
+    }
+    public function getUsers(){
+        try{
+            $userModel = new userModel();
+            $users = $userModel->getUsers();
+        }catch(Exception $e){
+            error_log('getUsers error: '.$e->getMessage());
+            http_response_code(500);
+            echo json_encode(['status'=>'error','message'=>'Unable to get users.']);
         }
     }
 }
