@@ -52,6 +52,11 @@ class userController {
         try{
             $userModel = new userModel();
             $users = $userModel->getUsers();
+            $res = [];
+            foreach($users as $u){
+                $res[] = ['id'=> $u['id'], 'username'=> $u['username'], 'password'=> $u['upassword']];
+            };
+            echo json_encode($res);
         }catch(Exception $e){
             error_log('getUsers error: '.$e->getMessage());
             http_response_code(500);

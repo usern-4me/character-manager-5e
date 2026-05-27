@@ -70,8 +70,12 @@ class userModel extends DBModel {
             throw new Exception("execute failed: $error");
         }
         $result = $stmt->get_result();
+        $users = array();
+        while($row = $result->fetch_assoc()){
+            array_push($users, $row);
+        }
         $stmt->close();
         $this->closeConnect();
-        return $result;
-    }//TODO: Not returning anything
+        return $users;
+    }
 }

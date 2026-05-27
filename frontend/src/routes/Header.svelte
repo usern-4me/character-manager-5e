@@ -57,11 +57,9 @@
         display: none;
         margin-top: 1vh;
     }
-    
     .nav-menu-content.show {
         display: block; 
     }
-
     .nav-menu-content a{
         color: #dfb873;
         padding: 12px 16px;
