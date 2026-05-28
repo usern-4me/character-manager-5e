@@ -2,8 +2,10 @@
 	import './layout.css';
 	import Header from './Header.svelte';
 
+	//TODO import token
+
 	import LoginView from './login/LoginView.svelte';
-	let isAuth = $state(true);
+	let isAuth = $state(false);
 	let { children } = $props();
 
 
