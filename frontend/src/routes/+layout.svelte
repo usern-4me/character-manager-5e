@@ -2,10 +2,12 @@
 	import './layout.css';
 	import Header from './Header.svelte';
 
-	//TODO import token
+	import {useAuth} from './../lib/index.ts';
+	const auth = useAuth();
 
 	import LoginView from './login/LoginView.svelte';
-	let isAuth = $state(false);
+
+	//TODO: make it work( and add backend to token)
 	let { children } = $props();
 
 
@@ -15,7 +17,7 @@
 
 </svelte:head>
 
-{#if !isAuth}
+{#if auth.isLoggedIn}
 <LoginView />
 {:else}
 <div id="app">
