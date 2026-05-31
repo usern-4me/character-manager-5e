@@ -58,6 +58,17 @@ switch ($request) {
         $controller = new userController();
         $controller->getUsers();
         break;
+    case 'verifuUser':
+        if($requestMethod !== 'POST'){
+            http_response_code(405);
+            echo json_encode(['error'=> 'Method Not Nllowed. Must be GET.']);
+            exit;
+        }
+        $username = $input['username'] ?? "";
+        $password = $input['password'] ?? "";
+        $controller = new userController();
+        $controller->verifyUser($username, $password);
+        break;
 
     default:
         http_response_code(404);
